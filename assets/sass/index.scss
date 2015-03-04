@@ -1,7 +1,5 @@
-.status-message {
-	border: 1px solid #c00;
-	background: #fac7c7;
-	padding: 10px;
+.js-enabled .widget-images {
+	display: none;
 }
 
 .outerwrapper {
@@ -9,14 +7,15 @@
 	position: relative;
 	border: 1px solid #c8c7cf;
 
-	h2 {
-		padding: 10px 10px 0 10px;
-		margin: 0;
+	h2,p {
+		margin: 10px 10px 0 10px;
+		padding: 0;
 	}
 
-	p {
-		padding: 10px;
-		margin: 0;
+	.key {
+		padding: 0px 0px 0px 9px;
+		border-left: 20px solid #cf071d;
+		margin: 10px;
 	}
 
 
@@ -24,5 +23,18 @@
 		width: 630px;
 	}
 
+	.widget-images {
+		p {
+			margin: 0px 0px 10px 10px;
+		}
+
+		ul {
+			padding-left: 0;
+		}
+
+		li {
+			list-style: none;
+		}
+	}
 } // outerwrapper
 

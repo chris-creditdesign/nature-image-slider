@@ -1,7 +1,5 @@
-.status-message {
-  border: 1px solid #c00;
-  background: #fac7c7;
-  padding: 10px;
+.js-enabled .widget-images {
+  display: none;
 }
 
 .outerwrapper {
@@ -9,14 +7,24 @@
   position: relative;
   border: 1px solid #c8c7cf;
 }
-.outerwrapper h2 {
-  padding: 10px 10px 0 10px;
-  margin: 0;
+.outerwrapper h2, .outerwrapper p {
+  margin: 10px 10px 0 10px;
+  padding: 0;
 }
-.outerwrapper p {
-  padding: 10px;
-  margin: 0;
+.outerwrapper .key {
+  padding: 0px 0px 0px 9px;
+  border-left: 20px solid #cf071d;
+  margin: 10px;
 }
 .outerwrapper input {
   width: 630px;
+}
+.outerwrapper .widget-images p {
+  margin: 0px 0px 10px 10px;
+}
+.outerwrapper .widget-images ul {
+  padding-left: 0;
+}
+.outerwrapper .widget-images li {
+  list-style: none;
 }

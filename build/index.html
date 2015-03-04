@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" class="js-enabled">
 <head>
 	<meta charset="UTF-8">
 	<title>Polopoly</title>
@@ -48,10 +48,8 @@
 
 
 <style scoped>
-.status-message {
-  border: 1px solid #c00;
-  background: #fac7c7;
-  padding: 10px;
+.js-enabled .widget-images {
+  display: none;
 }
 
 .outerwrapper {
@@ -59,32 +57,77 @@
   position: relative;
   border: 1px solid #c8c7cf;
 }
-.outerwrapper h2 {
-  padding: 10px 10px 0 10px;
-  margin: 0;
+.outerwrapper h2, .outerwrapper p {
+  margin: 10px 10px 0 10px;
+  padding: 0;
 }
-.outerwrapper p {
-  padding: 10px;
-  margin: 0;
+.outerwrapper .key {
+  padding: 0px 0px 0px 9px;
+  border-left: 20px solid #cf071d;
+  margin: 10px;
 }
 .outerwrapper input {
   width: 630px;
+}
+.outerwrapper .widget-images p {
+  margin: 0px 0px 10px 10px;
+}
+.outerwrapper .widget-images ul {
+  padding-left: 0;
+}
+.outerwrapper .widget-images li {
+  list-style: none;
 }
 
 </style>
 <div class="outerwrapper">
 	<h2>Headline</h2>
-	<p>Year: TK</p>
+	<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolor quidem aliquam deserunt provident, vero excepturi iste voluptatibus at soluta fugiat.</p>
+	<p class="key">Land used intensively by humans.</p>
 	<div class="widget-images">
-		<img src="https://poly-admin1.nature.com/polopoly/polopoly_fs/7.24177.1425403041!/slideshowimage/anthropocene-slideshow-1.jpg" alt="Image 1" />
-		<img src="https://poly-admin1.nature.com/polopoly/polopoly_fs/7.24178.1425403041!/slideshowimage/anthropocene-slideshow-2.jpg" alt="Image 2" />
-		<img src="https://poly-admin1.nature.com/polopoly/polopoly_fs/7.24179.1425403041!/slideshowimage/anthropocene-slideshow-3.jpg" alt="Image 3" />
-		<img src="https://poly-admin1.nature.com/polopoly/polopoly_fs/7.24180.1425403041!/slideshowimage/anthropocene-slideshow-4.jpg" alt="Image 4" />
-		<img src="https://poly-admin1.nature.com/polopoly/polopoly_fs/7.24181.1425403041!/slideshowimage/anthropocene-slideshow-5.jpg" alt="Image 5" />
-		<img src="https://poly-admin1.nature.com/polopoly/polopoly_fs/7.24182.1425403041!/slideshowimage/anthropocene-slideshow-6.jpg" alt="Image 6" />
-		<img src="https://poly-admin1.nature.com/polopoly/polopoly_fs/7.24183.1425403042!/slideshowimage/anthropocene-slideshow-7.jpg" alt="Image 7" />
-		<img src="https://poly-admin1.nature.com/polopoly/polopoly_fs/7.24184.1425403042!/slideshowimage/anthropocene-slideshow-8.jpg" alt="Image 8" />
-		<img src="https://poly-admin1.nature.com/polopoly/polopoly_fs/7.24185.1425403042!/slideshowimage/anthropocene-slideshow-9.jpg" alt="Image 9" />
+	<ul>
+		<li>
+			<img src="https://poly-admin1.nature.com/polopoly/polopoly_fs/7.24177.1425403041!/slideshowimage/anthropocene-slideshow-1.jpg" alt="8,000 years before present"/>
+			<p>8,000 years before present</p>
+		</li>
+		<li>
+			<img src="https://poly-admin1.nature.com/polopoly/polopoly_fs/7.24178.1425403041!/slideshowimage/anthropocene-slideshow-2.jpg" alt="5,000 years before present" />
+			<p>5,000 years BP</p>
+		</li>
+		<li>
+			<img src="https://poly-admin1.nature.com/polopoly/polopoly_fs/7.24179.1425403041!/slideshowimage/anthropocene-slideshow-3.jpg" alt="3,000 years BP" />
+			<p>3,000 years BP</p>
+		</li>
+		<li>
+			<img src="https://poly-admin1.nature.com/polopoly/polopoly_fs/7.24180.1425403041!/slideshowimage/anthropocene-slideshow-4.jpg" alt="2,000 years BP" />
+			<p>2,000 years BP</p>
+		</li>
+		<li>
+			<img src="https://poly-admin1.nature.com/polopoly/polopoly_fs/7.24181.1425403041!/slideshowimage/anthropocene-slideshow-5.jpg" alt="1,000 years BP" />
+			<p>1,000 years BP</p>
+		</li>
+		<li>
+			<img src="https://poly-admin1.nature.com/polopoly/polopoly_fs/7.24182.1425403041!/slideshowimage/anthropocene-slideshow-6.jpg" alt="1,500 AD" />
+			<p>1,500 AD</p>
+		</li>
+		<li>
+			<img src="https://poly-admin1.nature.com/polopoly/polopoly_fs/7.24183.1425403042!/slideshowimage/anthropocene-slideshow-7.jpg" alt="1,750 AD" />
+			<p>1,750 AD</p>
+		</li>
+		<li>
+			<img src="https://poly-admin1.nature.com/polopoly/polopoly_fs/7.24184.1425403042!/slideshowimage/anthropocene-slideshow-8.jpg" alt="1,900 AD" />
+			<p>1,900 AD</p>
+		</li>
+		<li>
+			<img src="https://poly-admin1.nature.com/polopoly/polopoly_fs/7.24185.1425403042!/slideshowimage/anthropocene-slideshow-9.jpg" alt="1,950 AD" />
+			<p>1,950 AD</p>
+		</li>
+		<li>
+			<img src="https://poly-admin1.nature.com/polopoly/polopoly_fs/7.24222.1425470763!/slideshowimage/anthropocene-slideshow-10.jpg" alt="2,000 AD" />
+			<p>2,000 AD</p>
+		</li>
+	</ul>
+		
 	</div>
 </div>
 
@@ -93,7 +136,6 @@
 (function() {
 		var init = function($)
 		{
-
 
 			$.getScript("http://www.nature.com/polopoly_static/js/d3.v3.min.js", function() {
 				var allImages = [];
@@ -111,18 +153,14 @@
 								.each(function(d,i) {
 									var thisImage = new Image();
 									thisImage.src = this.src;
+									thisImage.alt = this.alt;
 
 									allImages.push(thisImage);
-								})
-								.style("display","none");
-
+								});
 
 				function drawFrame (num) {
+					console.log(allImages[num].alt);
 					ctx.drawImage(allImages[num], 0, 0);
-				}
-
-				allImages[0].onload = function() {
-					drawFrame(0);
 				}
 
 				function makeRange () {
@@ -154,7 +192,10 @@
 					select.on("change", function() {
 						drawFrame(this.value);
 					});
+				}
 
+				allImages[0].onload = function() {
+					drawFrame(0);
 				}
 
 				if (testInput.type !== "text") {
