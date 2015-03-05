@@ -9,6 +9,8 @@
 											.attr("width", 630)
 											.attr("height", 298);
 				var ctx = canvas.node().getContext("2d");
+
+				var dateDisplay = outerWrapper.select("#date");
 				
 				var testInput = document.createElement("input");
 				testInput.setAttribute("type", "range");
@@ -29,7 +31,7 @@
 				}
 
 				function drawFrame (num) {
-					console.log(allImages[num].alt);
+					dateDisplay.text(allImages[num].alt);
 					ctx.drawImage(allImages[num], 0, 0);
 				}
 

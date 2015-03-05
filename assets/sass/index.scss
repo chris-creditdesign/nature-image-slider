@@ -38,6 +38,14 @@
 		padding: 10px 20px;
 	}
 
+	.widget-canvas {
+		position: relative;
+		p {
+			position: absolute;
+			font-weight: bold;
+		}
+	}
+
 	// https://css-tricks.com/styling-cross-browser-compatible-range-inputs-css/
 	input[type=range] {
 		-webkit-appearance: none;

@@ -28,6 +28,13 @@
 .outerwrapper .widget-selector {
   padding: 10px 20px;
 }
+.outerwrapper .widget-canvas {
+  position: relative;
+}
+.outerwrapper .widget-canvas p {
+  position: absolute;
+  font-weight: bold;
+}
 .outerwrapper input[type=range] {
   -webkit-appearance: none;
   margin: 10px 0;
