@@ -1,8 +1,4 @@
 <style scoped>
-.js-enabled .widget-images {
-  display: none;
-}
-
 .outerwrapper {
   width: 100%;
   position: relative;
@@ -18,7 +14,8 @@
   margin: 10px;
 }
 .outerwrapper input {
-  width: 630px;
+  width: 90%;
+  margin: 0 5%;
 }
 .outerwrapper .widget-images p {
   margin: 0px 0px 10px 10px;
@@ -29,12 +26,94 @@
 .outerwrapper .widget-images li {
   list-style: none;
 }
+.outerwrapper .widget-selector {
+  padding: 10px 20px;
+}
+.outerwrapper input[type=range] {
+  -webkit-appearance: none;
+  margin: 10px 0;
+  width: 100%;
+}
+.outerwrapper input[type=range]:focus {
+  outline: none;
+}
+.outerwrapper input[type=range]::-webkit-slider-runnable-track {
+  height: 8px;
+  background: #999;
+  border-radius: 4px;
+}
+.outerwrapper input[type=range]::-webkit-slider-thumb {
+  border: 4px solid #fff;
+  height: 25px;
+  width: 25px;
+  border-radius: 50%;
+  background: #333;
+  cursor: pointer;
+  -webkit-appearance: none;
+  margin-top: -7.6px;
+  transition: border-color 200ms;
+}
+.outerwrapper input[type=range]:focus::-webkit-slider-thumb {
+  border-color: skyblue;
+}
+.outerwrapper input[type=range]::-moz-range-track {
+  height: 8px;
+  background: #999;
+  border-radius: 4px;
+}
+.outerwrapper input[type=range]::-moz-range-thumb {
+  border: 4px solid #fff;
+  height: 20px;
+  width: 20px;
+  border-radius: 50%;
+  background: #333;
+  cursor: pointer;
+  transition: border-color 200ms;
+}
+.outerwrapper input[type=range]:focus::-moz-range-thumb {
+  border-color: skyblue;
+}
+.outerwrapper input[type=range]::-ms-track {
+  width: 100%;
+  height: 8px;
+  background: transparent;
+  border-color: transparent;
+  border-width: 20px 0;
+  color: transparent;
+}
+.outerwrapper input[type=range]::-ms-fill-lower {
+  background: #999;
+  border: 0px solid #000101;
+  border-radius: 50px;
+}
+.outerwrapper input[type=range]::-ms-fill-upper {
+  background: #999;
+  border: 0px solid #000101;
+  border-radius: 50px;
+}
+.outerwrapper input[type=range]::-ms-thumb {
+  border: 4px solid #fff;
+  height: 20px;
+  width: 20px;
+  border-radius: 50%;
+  background: #333;
+  transition: border-color 200ms;
+}
+.outerwrapper input[type=range]:focus::-ms-thumb {
+  border-color: skyblue;
+}
+
+.js-enabled .widget-images {
+  display: none;
+}
 
 </style>
 <div class="outerwrapper">
 	<h2>Headline</h2>
 	<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolor quidem aliquam deserunt provident, vero excepturi iste voluptatibus at soluta fugiat.</p>
 	<p class="key">Land used intensively by humans.</p>
+	<div class="widget-canvas"></div>
+	<div class="widget-selector"></div>
 	<div class="widget-images">
 	<ul>
 		<li>
@@ -87,11 +166,11 @@
 (function() {
 		var init = function($)
 		{
-
 			$.getScript("http://www.nature.com/polopoly_static/js/d3.v3.min.js", function() {
 				var allImages = [];
 				var outerWrapper = d3.select(".outerwrapper");
-				var canvas = outerWrapper.append("canvas")
+				var canvas = outerWrapper.select(".widget-canvas")
+											.append("canvas")
 											.attr("width", 630)
 											.attr("height", 298);
 				var ctx = canvas.node().getContext("2d");
@@ -99,8 +178,9 @@
 				var testInput = document.createElement("input");
 				testInput.setAttribute("type", "range");
 
-				var images = outerWrapper.select(".widget-images")
-								.selectAll("img")
+				var widgetImages = outerWrapper.select(".widget-images");
+								
+				var images = widgetImages.selectAll("img")
 								.each(function(d,i) {
 									var thisImage = new Image();
 									thisImage.src = this.src;
@@ -109,13 +189,18 @@
 									allImages.push(thisImage);
 								});
 
+				if (widgetImages.style("display") !== "none") {
+					widgetImages.style("display","none");
+				}
+
 				function drawFrame (num) {
 					console.log(allImages[num].alt);
 					ctx.drawImage(allImages[num], 0, 0);
 				}
 
 				function makeRange () {
-					var range = outerWrapper.append("input")
+					var range = outerWrapper.select(".widget-selector")
+												.append("input")
 												.attr("type","range")
 												.attr("min", 0)
 												.attr("max", (images[0].length - 1))
@@ -127,7 +212,8 @@
 				}
 
 				function makeSelect () {
-					var select = outerWrapper.append("select");
+					var select = outerWrapper.select(".widget-selector")
+									.append("select");
 
 					select.selectAll("option")
 						.data(images[0])
@@ -147,7 +233,7 @@
 
 				allImages[0].onload = function() {
 					drawFrame(0);
-				}
+				};
 
 				if (testInput.type !== "text") {
 					makeRange();
