@@ -110,7 +110,3 @@
 .outerwrapper input[type=range]:focus::-ms-thumb {
   border-color: skyblue;
 }
-
-.js-enabled .widget-images {
-  display: none;
-}
