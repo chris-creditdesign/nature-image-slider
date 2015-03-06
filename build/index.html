@@ -226,6 +226,15 @@
 <script type="text/javascript">
 
 (function() {
+	/**
+	 * supports_canvas() - Check to see if the browser supports canvas
+	 * http://diveintohtml5.info/detect.html#canvas
+	 * @return true if canvas supported
+	 */
+	function supports_canvas() {
+  		return !!document.createElement('canvas').getContext;
+	}
+
 	var init = function($) {
 		$.getScript("http://www.nature.com/polopoly_static/js/d3.v3.min.js", function() {
 			var allImages = [];
@@ -258,10 +267,6 @@
 
 								allImages.push(thisImage);
 							});
-
-			if (widgetImages.style("display") !== "none") {
-				widgetImages.style("display","none");
-			}
 
 			function drawFrame (num) {
 				dateDisplay.text(allImages[num].alt);
@@ -340,13 +345,16 @@
 		});
 	};
 
+	/*	jQuery ready check for canvas */
 	setTimeout(function() {
 		if (typeof jQuery !== 'undefined') {
-			/*	jQuery ready check for canvas */
-			if ( document.implementation.hasFeature('http://www.w3.org/TR/SVG11/feature#Image','1.1') ) {
+			if ( supports_canvas() ) {
+				if (jQuery(".widget-images").css("display") !== "none") {
+					jQuery(".widget-images").css("display","none");
+				}
 				init(jQuery);
 			} else {
-				jQuery(".widget-status-message").css("display","block");
+				jQuery(".widget-images").css("display","block");
 			}
 		} else {
 			setTimeout(arguments.callee, 60);
