@@ -1,4 +1,3 @@
-
 (function() {
 	var d3url = "http://www.nature.com/polopoly_static/js/d3.v3.min.js";
 
@@ -17,6 +16,7 @@
 
 			var range;
 			var select;
+			var rangeWorking = false;
 
 			var outerWrapper = d3.select(".outerwrapper");
 			var canvas = outerWrapper.select(".widget-canvas")
@@ -61,8 +61,17 @@
 											.attr("step", 1)
 											.attr("value", 0)
 											.on("input", function() {
+												rangeWorking = true;
 												drawFrame(this.value);
-											});
+											});				
+
+				/*	selection.on("input") doesn't seem to work in ie
+					repeating the call to drawFrame() here on slide end */
+				jQuery(".outerwrapper input[type='range']").click(function(){
+					this.blur();
+					this.focus();
+					drawFrame(this.value);
+				});
 			}
 
 			/*	makeSelect()
@@ -124,6 +133,7 @@
 			}
 
 			window.onresize = resize;
+
 		}, function () {
 			/*	D3 has failed to load so show the images */
 			$(".widget-images").css("display","block");
