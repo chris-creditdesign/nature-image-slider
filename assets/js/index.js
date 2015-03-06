@@ -1,16 +1,15 @@
 
 (function() {
-	/**
-	 * supports_canvas() - Check to see if the browser supports canvas
-	 * http://diveintohtml5.info/detect.html#canvas
-	 * @return true if canvas supported
-	 */
+	var d3url = "http://www.nature.com/polopoly_static/js/d3.v3.min.js";
+
+	/*	supports_canvas() - Check to see if the browser supports canvas
+		return true if canvas supported */
 	function supports_canvas() {
   		return !!document.createElement('canvas').getContext;
 	}
 
 	var init = function($) {
-		$.getScript("http://www.nature.com/polopoly_static/js/d3.v3.min.js", function() {
+		$.when( $.getScript(d3url) ).then( function() {
 			var allImages = [];
 
 			var width = $("#content").width();
@@ -32,7 +31,9 @@
 			testInput.setAttribute("type", "range");
 
 			var widgetImages = outerWrapper.select(".widget-images");
-							
+			
+			/*	Select each of the images and push a new img object into
+				the allImages array with the relevant src and alt properties */
 			var images = widgetImages.selectAll("img")
 							.each(function(d,i) {
 								var thisImage = new Image();
@@ -42,11 +43,15 @@
 								allImages.push(thisImage);
 							});
 
+			/*	drawFrame() num = value of input or select
+				redraw the canvas and update the #date text */
 			function drawFrame (num) {
 				dateDisplay.text(allImages[num].alt);
 				ctx.drawImage(allImages[num], 0, 0, width, height);
 			}
 
+			/*	makeRange()
+				Append an input[type="range"] and call drawFrame on change */
 			function makeRange () {
 				range = outerWrapper.select(".widget-selector")
 											.append("input")
@@ -60,6 +65,8 @@
 											});
 			}
 
+			/*	makeSelect()
+				Append a select element and call drawFrame on change */
 			function makeSelect () {
 				select = outerWrapper.select(".widget-selector")
 								.append("select");
@@ -80,10 +87,8 @@
 				});
 			}
 
-			/**
-			 * [resize description]
-			 * @return {[type]} [description]
-			 */
+			/*	resize()
+				Redraw and resize the canvas */
 			function resize () {
 				if($(window).width() != width){
 					var currentFrame;
@@ -105,10 +110,13 @@
 				}
 			}
 
+			/* Fill the canvas with frame 0 as soon as it is ready */
 			allImages[0].onload = function() {
 				drawFrame(0);
 			};
 
+			/*	call makeRange() if input[type="range"] is suported
+				call makeSelect() otherwise */
 			if (testInput.type !== "text") {
 				makeRange();
 			} else {
@@ -116,10 +124,16 @@
 			}
 
 			window.onresize = resize;
+		}, function () {
+			/*	D3 has failed to load so show the images */
+			$(".widget-images").css("display","block");
 		});
 	};
 
-	/*	jQuery ready check for canvas */
+	/*	Before calling init()
+		- check jQuery is loaded
+		- check the browser supports canvas
+		- check the images are hidden */
 	setTimeout(function() {
 		if (typeof jQuery !== 'undefined') {
 			if ( supports_canvas() ) {
