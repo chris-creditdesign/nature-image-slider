@@ -11,7 +11,8 @@
 		$.when( $.getScript(d3url) ).then( function() {
 			var allImages = [];
 
-			var width = $("#content").width();
+			/* Remove 2px from the width to acount for the border */
+			var width = $("#content").width() - 2;
 			var height = Math.floor(width * 0.48);
 
 			var range;
