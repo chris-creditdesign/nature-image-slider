@@ -121,8 +121,8 @@
 </style>
 <!--<![endif]-->
 <div class="outerwrapper">
-	<h2>Headline</h2>
-	<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolor quidem aliquam deserunt provident, vero excepturi iste voluptatibus at soluta fugiat.</p>
+	<h2>Interactive: Landscape architecture</h2>
+	<p>A model of human population and land use suggests that people modified substantial parts of the continents even thousands of years ago.</p>
 	<p class="key">Land used intensively by humans.</p>
 	<div class="widget-canvas cf">
 		<p id="date"></p>
@@ -190,7 +190,8 @@
 		$.when( $.getScript(d3url) ).then( function() {
 			var allImages = [];
 
-			var width = $("#content").width();
+			/* Remove 2px from the width to acount for the border */
+			var width = $("#content").width() - 2;
 			var height = Math.floor(width * 0.48);
 
 			var range;
