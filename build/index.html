@@ -38,7 +38,7 @@
 				<div id="article">
 					<section>
 						<div class="section">
-							<div class="html-widget img-right">
+							<div class="html-widget img-middle">
 
 <!-- ========= PASTED POLOPOLY HEADER ABOVE ========= -->
 
@@ -74,21 +74,12 @@
   padding: 10px 0 0 0;
 }
 .outerwrapper p {
-  margin: 10px 10px 0 10px;
-  padding: 0;
-}
-.outerwrapper .key {
-  padding: 0px 0px 0px 9px;
-  border-left: 20px solid #cf071d;
   margin: 10px;
+  padding: 0;
 }
 .outerwrapper input {
   width: 90%;
   margin: 0 5%;
-}
-.outerwrapper .widget-images p {
-  margin: 0px 0px 10px 10px;
-  font-variant: small-caps;
 }
 .outerwrapper .widget-images ul {
   padding-left: 0;
@@ -97,20 +88,19 @@
   list-style: none;
 }
 .outerwrapper .widget-selector {
-  padding: 10px 20px;
+  padding: 0 3%;
+  position: relative;
+  height: 0;
 }
 .outerwrapper .widget-canvas {
   position: relative;
-}
-.outerwrapper .widget-canvas p {
-  position: absolute;
-  font-weight: bold;
-  font-variant: small-caps;
+  margin: 0 5%;
 }
 .outerwrapper input[type=range] {
   -webkit-appearance: none;
-  margin: 10px 0;
+  margin: 0;
   width: 100%;
+  background: none;
 }
 .outerwrapper input[type=range]:focus {
   outline: none;
@@ -119,9 +109,7 @@
   border: 0;
 }
 .outerwrapper input[type=range]::-webkit-slider-runnable-track {
-  height: 8px;
-  background: #999;
-  border-radius: 4px;
+  background: transparent;
 }
 .outerwrapper input[type=range]::-webkit-slider-thumb {
   border: 4px solid #fff;
@@ -138,9 +126,7 @@
   border-color: skyblue;
 }
 .outerwrapper input[type=range]::-moz-range-track {
-  height: 8px;
-  background: #999;
-  border-radius: 4px;
+  background: transparent;
 }
 .outerwrapper input[type=range]::-moz-range-thumb {
   border: 4px solid #fff;
@@ -163,14 +149,10 @@
   color: transparent;
 }
 .outerwrapper input[type=range]::-ms-fill-lower {
-  background: #999;
-  border: 0px solid #000101;
-  border-radius: 50px;
+  background: transparent;
 }
 .outerwrapper input[type=range]::-ms-fill-upper {
-  background: #999;
-  border: 0px solid #000101;
-  border-radius: 50px;
+  background: transparent;
 }
 .outerwrapper input[type=range]::-ms-thumb {
   border: 4px solid #fff;
@@ -193,188 +175,166 @@
 </style>
 <!--<![endif]-->
 <div class="outerwrapper">
-	<h2>Interactive: Landscape architecture</h2>
-	<p>A model of land use, based on human-population estimates, suggests that people modified substantial parts of the continents even thousands of years ago.</p>
-	<p class="key">Land used intensively by humans.</p>
-	<div class="widget-canvas cf">
-		<p id="date"></p>
-	</div>
+	<h2>Image slider</h2>
+	<p>Greenland before and after.</p>
+	<div class="widget-canvas"></div>
 	<div class="widget-selector"></div>
 	<div class="widget-images">
 	<ul>
 		<li>
-			<img src="http://www.nature.com/polopoly_fs/7.24327.1425987796!/image/anthropocene-slideshow-1.jpg" alt="8,000 years before present (bp)"/>
-			<p>8,000 years before present (bp)</p>
+			<img src="http://www.nature.com/polopoly_fs/7.37796.1468426670!/image/montage-1-a.jpg" alt="before"/>
+			<p>Before</p>
 		</li>
 		<li>
-			<img src="http://www.nature.com/polopoly_fs/7.24328.1425987832!/image/anthropocene-slideshow-2.jpg" alt="5,000 years bp" />
-			<p>5,000 years bp</p>
-		</li>
-		<li>
-			<img src="http://www.nature.com/polopoly_fs/7.24329.1425987848!/image/anthropocene-slideshow-3.jpg" alt="3,000 years bp" />
-			<p>3,000 years bp</p>
-		</li>
-		<li>
-			<img src="http://www.nature.com/polopoly_fs/7.24330.1425987871!/image/anthropocene-slideshow-4.jpg" alt="2,000 years bp" />
-			<p>2,000 years bp</p>
-		</li>
-		<li>
-			<img src="http://www.nature.com/polopoly_fs/7.24331.1425987907!/image/anthropocene-slideshow-5.jpg" alt="1,000 years bp" />
-			<p>1,000 years bp</p>
-		</li>
-		<li>
-			<img src="http://www.nature.com/polopoly_fs/7.24332.1425987925!/image/anthropocene-slideshow-6.jpg" alt="ad 1500" />
-			<p>ad 1500</p>
-		</li>
-		<li>
-			<img src="http://www.nature.com/polopoly_fs/7.24333.1425987942!/image/anthropocene-slideshow-7.jpg" alt="ad 1750" />
-			<p>ad 1750</p>
-		</li>
-		<li>
-			<img src="http://www.nature.com/polopoly_fs/7.24334.1425988032!/image/anthropocene-slideshow-8.jpg" alt="ad 1900" />
-			<p>ad 1900</p>
-		</li>
-		<li>
-			<img src="http://www.nature.com/polopoly_fs/7.24335.1425988060!/image/anthropocene-slideshow-9.jpg" alt="ad 1950" />
-			<p>ad 1950</p>
-		</li>
-		<li>
-			<img src="http://www.nature.com/polopoly_fs/7.24336.1425988089!/image/anthropocene-slideshow-10.jpg" alt="ad 2000" />
-			<p>ad 2000</p>
+			<img src="https://poly-admin1.nature.com/polopoly/polopoly_fs/7.37797.1468426722!/image/montage-1-b.jpg" alt="after" />
+			<p>After</p>
 		</li>
 	</ul>
 		
 	</div>
 </div>
 
-<p class="credit">Source: E. C. Ellis <em>Phil. Trans. R. Soc.</em> A <strong>369</strong>, 1010–1035 (2011).</p>
+<p class="credit">Source:</p>
 
 <!--[if gt IE 8]><!-->
 <script type="text/javascript">
 (function() {
-	var d3url = "http://www.nature.com/polopoly_static/js/d3.v3.min.js";
-
 	var init = function($) {
-		$.when( $.getScript(d3url) ).then( function() {
-			var allImages = [];
+		var allImages = [];
 
-			/* Store with window Width to stop iOS resizing on scroll */
-			var windowWidth = $(window).width();
-			/* Remove 2px from the width to acount for the border */
-			var width = $("#content").width() - 2;
+		/* Store with window Width to stop iOS resizing on scroll */
+		var windowWidth = $(window).width();
+		
+		var width = $("#content").width() * 0.9;
+		var height = Math.floor(width * 0.62);
 
-			var range;
-			var select;
-			var rangeWorking = false;
+		var range;
+		var select;
+		var startingValue = 0.5;
 
-			var outerWrapper = d3.select(".outerwrapper");
+		var outerWrapper = $(".outerwrapper");
+		outerWrapper.find(".widget-selector").css("top", height * -1);
 
-			var imageCanvas = outerWrapper.select(".widget-canvas")
-										.append("img");
+		var imageCanvas = $("<canvas></canvas>");
+		var rangeInput = $("<input />");
 
-			var dateDisplay = outerWrapper.select("#date");
-			
-			var testInput = document.createElement("input");
-			testInput.setAttribute("type", "range");
-
-			var widgetImages = outerWrapper.select(".widget-images");
-			
-			/*	Select each of the images and push a new img object into
-				the allImages array with the relevant src and alt properties */
-			var images = widgetImages.selectAll("img")
-							.each(function(d,i) {
-								var thisImage = new Image();
-								thisImage.src = this.src;
-								thisImage.alt = this.alt;
-
-								allImages.push(thisImage);
-							});
-
-			/*	drawFrame() num = value of input or select
-				redraw the canvas and update the #date text */
-			function drawFrame (num) {
-				dateDisplay.text(allImages[num].alt);
-				imageCanvas.attr("src", allImages[num].src)
-							.attr("alt", allImages[num].alt);
-			}
-
-			/*	makeRange()
-				Append an input[type="range"] and call drawFrame on change */
-			function makeRange () {
-				range = outerWrapper.select(".widget-selector")
-											.append("input")
-											.attr("type","range")
-											.attr("min", 0)
-											.attr("max", (images[0].length - 1))
-											.attr("step", 1)
-											.attr("value", 0)
-											.on("input", function() {
-												rangeWorking = true;
-												drawFrame(this.value);
-											});				
-
-				/*	selection.on("input") doesn't seem to work in ie
-					repeating the call to drawFrame() here on slide end */
-				jQuery(".outerwrapper input[type='range']").click(function(){
-					this.blur();
-					this.focus();
-					drawFrame(this.value);
-				});
-			}
-
-			/*	makeSelect()
-				Append a select element and call drawFrame on change */
-			function makeSelect () {
-				select = outerWrapper.select(".widget-selector")
-								.append("select");
-
-				select.selectAll("option")
-					.data(images[0])
-					.enter()
-					.append("option")
-					.attr("value", function(d,i) {
-						return i;
-					})
-					.text(function(d,i) {
-						return d.alt;
-					});
-
-				select.on("change", function() {
-					drawFrame(this.value);
-				});
-			}
-
-			/*	resize()
-				Redraw and resize the canvas */
-			function resize () {
-				if($(window).width() != windowWidth){
-					
-					windowWidth = $(window).width();
-					width = $("#content").width();
-
-					outerWrapper.style("width", width + "px");
-				}
-			}
-
-			/* Fill the canvas image with frame 0 as soon as it is ready */
-			allImages[0].onload = function() {
-				drawFrame(0);
-			};
-
-			/*	call makeRange() if input[type="range"] is suported
-				call makeSelect() otherwise */
-			if (testInput.type !== "text") {
-				makeRange();
-			} else {
-				makeSelect();
-			}
-
-			window.onresize = resize;
-
-		}, function () {
-			/*	D3 has failed to load so show the images */
-			jQuery(".widget-images").css("display","block");
+		imageCanvas.attr({
+			"width": width,
+			"height": height
 		});
+
+		outerWrapper.find(".widget-canvas")
+			.append(imageCanvas);
+
+		var ctx = imageCanvas[0].getContext("2d");
+		ctx.strokeStyle = "#ffffff";
+		ctx.lineWidth = 2;
+		
+		var testInput = document.createElement("input");
+		testInput.setAttribute("type", "range");
+
+		var widgetImages = outerWrapper.select(".widget-images");
+		
+		/*	Select each of the images and push a new img object into
+			the allImages array with the relevant src */
+		var images = widgetImages.find("img");
+
+		$.each(images, function (key, value) {
+			var thisImage = new Image();
+			thisImage.src = this.src;
+			allImages.push(thisImage);
+		});
+
+		/*	drawFrame() num = value of input
+			redraw the canvas */
+		function drawFrame (num) {
+			ctx.clearRect(0,0,width,height);
+
+			ctx.fillStyle = "rgb(200,0,0)";
+	        ctx.fillRect (0, 0, width, height);
+			
+			/* Check that num is greater than 0 so we're not multiplying width by 0 */
+			if (num > 0) {
+				ctx.drawImage(allImages[0], 0, 0, (width * num), height, 0, 0, (width * num), height);
+				ctx.drawImage(allImages[1], (width * num), 0, (width * (1 - num)), height, (width * num), 0, (width * (1 - num)), height);
+			} else {
+				ctx.drawImage(allImages[1], 0, 0, width, height, 0, 0, width, height);
+			}
+			
+			ctx.beginPath();
+			ctx.moveTo((width * num),0);
+			ctx.lineTo((width * num),height);
+			ctx.closePath();
+			ctx.stroke();
+		}
+
+		/*	makeRange()
+			Append an input[type="range"] and call drawFrame on change */
+		function makeRange () {
+			
+			rangeInput.attr({
+				"type" : "range",
+				"min" : 0,
+				"max" : images.length - 1,
+				"step" : "any",
+				"value" : startingValue
+			}).css("height",height);
+
+			range = outerWrapper.find(".widget-selector");
+			range.append(rangeInput);
+			
+			rangeInput.bind("input", function() {
+				drawFrame(parseFloat(this.value));
+			});
+		}
+
+		/*	makeSelect()
+			Append a select element and call drawFrame on change */
+		function makeSelect () {
+			console.log("Let's call the whole thing off");
+		}
+
+		/*	resize()
+			Redraw and resize the canvas */
+		function resize () {
+			if($(window).width() != windowWidth){
+				
+				windowWidth = $(window).width();
+				width = $("#content").width() * 0.9;
+				height = Math.floor(width * 0.62);
+
+				imageCanvas.attr({
+					"width": width,
+					"height": height
+				});
+
+				ctx.strokeStyle = "#ffffff";
+				ctx.lineWidth = 2;
+
+				rangeInput.attr({"value": startingValue});
+				drawFrame(startingValue);
+			}
+		}
+
+		/* Fill the canvas image with frame 0 as soon as it is ready */
+		allImages[0].onload = function() {
+			drawFrame(startingValue);
+		};
+
+		allImages[1].onload = function() {
+			drawFrame(startingValue);
+		};
+
+		/*	call makeRange() if input[type="range"] is suported
+			call makeSelect() otherwise */
+		if (testInput.type !== "text") {
+			makeRange();
+		} else {
+			makeSelect();
+		}
+
+		window.onresize = resize;
+
 	};
 
 	/*	Before calling init()
