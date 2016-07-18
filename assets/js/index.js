@@ -5,15 +5,29 @@
 		/* Store with window Width to stop iOS resizing on scroll */
 		var windowWidth = $(window).width();
 		
-		var width = $("#content").width() * 0.9;
-		var height = Math.floor(width * 0.62);
-
 		var range;
 		var select;
-		var startingValue = 0.5;
+		var startingValue = 0;
+		var heightRatio = 0.6667;
+
+		var width = $("#content").width() * 0.9;
+		var height = Math.floor(width * heightRatio);
+
+		var touchSupported = 'ontouchstart' in window;
+		var startEvent = touchSupported ? 'touchstart' : 'mousedown';
+		var moveEvent = touchSupported ? 'touchmove' : 'mousemove';
+		var endEvent = touchSupported ? 'touchend' : 'mouseup';
+		var mouseDown = false;
+
+		$("body").bind(startEvent, function() {
+			mouseDown = true;
+		});
+
+		$("body").bind(endEvent, function() {
+			mouseDown = false;
+		});
 
 		var outerWrapper = $(".outerwrapper");
-		outerWrapper.find(".widget-selector").css("top", height * -1);
 
 		var imageCanvas = $("<canvas></canvas>");
 		var rangeInput = $("<input />");
@@ -55,10 +69,10 @@
 			
 			/* Check that num is greater than 0 so we're not multiplying width by 0 */
 			if (num > 0) {
-				ctx.drawImage(allImages[0], 0, 0, (width * num), height, 0, 0, (width * num), height);
-				ctx.drawImage(allImages[1], (width * num), 0, (width * (1 - num)), height, (width * num), 0, (width * (1 - num)), height);
+				ctx.drawImage(allImages[1], 0, 0, (width * num), height, 0, 0, (width * num), height);
+				ctx.drawImage(allImages[0], (width * num), 0, (width * (1 - num)), height, (width * num), 0, (width * (1 - num)), height);
 			} else {
-				ctx.drawImage(allImages[1], 0, 0, width, height, 0, 0, width, height);
+				ctx.drawImage(allImages[0], 0, 0, width, height, 0, 0, width, height);
 			}
 			
 			ctx.beginPath();
@@ -78,7 +92,7 @@
 				"max" : images.length - 1,
 				"step" : "any",
 				"value" : startingValue
-			}).css("height",height);
+			});
 
 			range = outerWrapper.find(".widget-selector");
 			range.append(rangeInput);
@@ -94,6 +108,39 @@
 			console.log("Let's call the whole thing off");
 		}
 
+		/*	getMousePos(canvas, evt)
+			Find out where the finger or the pointer is on the canvas */
+		function getMousePos(canvas, evt) {
+			var rect = canvas.getBoundingClientRect();
+			var x,y;
+			
+			if (touchSupported) {
+				x = evt.originalEvent.targetTouches[0].clientX;
+				y = evt.originalEvent.targetTouches[0].clientY;
+			} else {
+				x = evt.clientX;
+				y = evt.clientY;
+			}
+			
+			return {
+				x: x - rect.left,
+				y: y - rect.top
+			};
+		}
+
+		/* Listen for click 'n drag or swiping on the canvas */
+		imageCanvas.bind(moveEvent, function (evt) {
+			
+			var mousePos = getMousePos(this, evt);
+			var message = mousePos.x / width;
+			
+			if (mouseDown) {
+				drawFrame(message);
+				rangeInput.prop("value", message);
+			}
+			
+		});
+
 		/*	resize()
 			Redraw and resize the canvas */
 		function resize () {
@@ -101,7 +148,7 @@
 				
 				windowWidth = $(window).width();
 				width = $("#content").width() * 0.9;
-				height = Math.floor(width * 0.62);
+				height = Math.floor(width * heightRatio);
 
 				imageCanvas.attr({
 					"width": width,
