@@ -1,6 +1,10 @@
 #Image slider for @NatureNews
 
-Built with [d3.js](http://d3js.org/).
+### To Do
+
+- Image loading
+- Image resizing
+- Select
 
 ### Build process
 
