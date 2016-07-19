@@ -7,8 +7,10 @@
 		
 		var range;
 		var select;
-		var startingValue = 0;
+		var startingValue = 0.5;
 		var heightRatio = 0.6667;
+		var strokeStyle = "#ffffff";
+		var lineWidth = 2;
 
 		var width = $("#content").width() * 0.9;
 		var height = Math.floor(width * heightRatio);
@@ -41,8 +43,12 @@
 			.append(imageCanvas);
 
 		var ctx = imageCanvas[0].getContext("2d");
-		ctx.strokeStyle = "#ffffff";
-		ctx.lineWidth = 2;
+		ctx.strokeStyle = strokeStyle;
+		ctx.lineWidth = lineWidth;
+
+		/* Delete this */
+		ctx.fillStyle = "rgba(0, 0, 200, 0.5)";
+		ctx.fillRect (0,0,width,height);
 		
 		var testInput = document.createElement("input");
 		testInput.setAttribute("type", "range");
@@ -52,20 +58,12 @@
 		/*	Select each of the images and push a new img object into
 			the allImages array with the relevant src */
 		var images = widgetImages.find("img");
-
-		$.each(images, function (key, value) {
-			var thisImage = new Image();
-			thisImage.src = this.src;
-			allImages.push(thisImage);
-		});
+		var imageCount = images.length;
 
 		/*	drawFrame() num = value of input
 			redraw the canvas */
 		function drawFrame (num) {
 			ctx.clearRect(0,0,width,height);
-
-			ctx.fillStyle = "rgb(200,0,0)";
-	        ctx.fillRect (0, 0, width, height);
 			
 			/* Check that num is greater than 0 so we're not multiplying width by 0 */
 			if (num > 0) {
@@ -163,14 +161,29 @@
 			}
 		}
 
-		/* Fill the canvas image with frame 0 as soon as it is ready */
-		allImages[0].onload = function() {
-			drawFrame(startingValue);
-		};
+		function checkImagesLoaded() {
+			imageCount--;
+			console.log("imageCount is " + imageCount + " images loaded");
+			
+			if (imageCount === 0) {
+				drawFrame(startingValue);
+			}
+		}
 
-		allImages[1].onload = function() {
-			drawFrame(startingValue);
-		};
+		// /* Fill the canvas image with frame 0 as soon as it is ready */
+		// allImages[0].onload = checkImagesLoaded();
+		// allImages[1].onload = checkImagesLoaded();
+
+		$.each(images, function (key, value) {
+
+			var thisImage = new Image();
+			thisImage.src = this.src;
+			allImages.push(thisImage);
+			
+			$(this).error(function(evt) {
+				console.log("We have an error!");
+			}).load(checkImagesLoaded());
+		});
 
 		/*	call makeRange() if input[type="range"] is suported
 			call makeSelect() otherwise */
@@ -189,9 +202,9 @@
 		- check the images are hidden */
 	setTimeout(function() {
 		if (typeof jQuery !== 'undefined') {
-			if (jQuery(".widget-images").css("display") !== "none") {
-				jQuery(".widget-images").css("display","none");
-			}
+			// if (jQuery(".widget-images").css("display") !== "none") {
+			// 	jQuery(".widget-images").css("display","none");
+			// }
 			init(jQuery);
 		} else {
 			setTimeout(arguments.callee, 60);

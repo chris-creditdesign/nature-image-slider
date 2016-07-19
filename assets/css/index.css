@@ -29,6 +29,9 @@
 .outerwrapper input {
   width: 100%;
 }
+.outerwrapper canvas {
+  cursor: col-resize;
+}
 .outerwrapper .widget-images ul {
   padding-left: 0;
 }
@@ -36,7 +39,7 @@
   list-style: none;
 }
 .outerwrapper .widget-selector {
-  padding: 0 5%;
+  padding: 0 5% 10px;
   margin: 10px 0;
 }
 .outerwrapper .widget-canvas {

@@ -30,6 +30,10 @@
 		width: 100%;
 	}
 
+	canvas {
+		cursor: col-resize;
+	}
+
 	.widget-images {
 		ul {
 			padding-left: 0;
@@ -41,7 +45,7 @@
 	}
 
 	.widget-selector {
-		padding: 0 5%;
+		padding: 0 5% 10px;
 		margin: 10px 0;
 	}
 
