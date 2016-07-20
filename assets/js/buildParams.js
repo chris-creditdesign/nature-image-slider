@@ -11,12 +11,15 @@ function buildParams() {
 	params.select = null;
 	params.startingValue = 0.5;
 	params.value = 0.5;
+	params.widthAdjustment = 0.9;
 	params.heightRatio = 0.6667;
 	params.strokeStyle = "#ffffff";
 	params.lineWidth = 2;
 
-	params.width = $("#content").width() * 0.9;
-	params.height = Math.floor(params.width * params.heightRatio);
+	var size = getCanvasSize(params.widthAdjustment, params.heightRatio);
+
+	params.width = size.width;
+	params.height = size.height;
 
 	params.touchSupported = 'ontouchstart' in window;
 	params.startEvent = params.touchSupported ? 'touchstart' : 'mousedown';
@@ -26,4 +29,15 @@ function buildParams() {
 
 
 	return params;
+}
+
+function getCanvasSize(widthAdjustment, heightRatio) {
+
+	var width = jQuery("#content").width() * widthAdjustment;
+	var height = Math.floor(width * heightRatio);
+
+	return {
+		width: width,
+		height: height
+	};
 }

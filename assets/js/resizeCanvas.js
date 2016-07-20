@@ -3,12 +3,13 @@
 BuildWidget.prototype.resizeCanvas = function() {
 	
 	if(jQuery(window).width() != this.params.windowWidth) {
-	console.log("We're resizing!");
-
 		
 		this.params.windowWidth = $(window).width();
-		this.params.width = $("#content").width() * 0.9;
-		this.params.height = Math.floor(this.params.width * this.params.heightRatio);
+
+		var size = getCanvasSize(this.params.widthAdjustment, this.params.heightRatio);
+
+		this.params.width = size.width;
+		this.params.height = size.height;
 
 		this.imageCanvas.attr({
 			"width": this.params.width,
