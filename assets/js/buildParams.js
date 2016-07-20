@@ -33,7 +33,7 @@ function buildParams() {
 
 function getCanvasSize(widthAdjustment, heightRatio) {
 
-	var width = jQuery("#content").width() * widthAdjustment;
+	var width = Math.floor(jQuery("#content").width() * widthAdjustment);
 	var height = Math.floor(width * heightRatio);
 
 	return {
