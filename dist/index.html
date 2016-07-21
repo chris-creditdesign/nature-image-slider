@@ -20,11 +20,11 @@
   background-color: #fff;
 }
 .outerwrapper h2 {
-  margin: 0 10px 0 10px;
-  padding: 10px 0 0 0;
+  margin: 0 10px 0 5%;
+  padding: 20px 0 0 0;
 }
 .outerwrapper p {
-  margin: 10px;
+  margin: 10px 10px 10px 5%;
   padding: 0;
 }
 .outerwrapper input {
@@ -63,7 +63,7 @@
 <!--<![endif]-->
 
 <div class="outerwrapper" id="slider-1">
-	<h2>Image slider: 1</h2>
+	<h2>Image slider 1</h2>
 	<p>Greenland before and after.</p>
 	<div class="widget-canvas"></div>
 	<div class="widget-selector"></div>
@@ -83,7 +83,7 @@
 <p class="credit">Source:</p>
 
 <div class="outerwrapper" id="slider-2">
-	<h2>Image slider: 2</h2>
+	<h2>Image slider 2</h2>
 	<p>Greenland before and after.</p>
 	<div class="widget-canvas"></div>
 	<div class="widget-selector"></div>
@@ -102,10 +102,13 @@
 </div>
 <p class="credit">Source:</p>
 
+<!-- Just for testing in polopoly preview -->
 <script src="https://code.jquery.com/jquery-1.6.4.min.js"></script>
 
 <!--[if gt IE 8]><!-->
 <script type="text/javascript">
+/*	buildParams()
+	create an object to store all the parameters for the slider */
 function buildParams() {
 	var params = {};
 
@@ -151,6 +154,7 @@ function getCanvasSize(widthAdjustment, heightRatio) {
 	};
 }
 
+/*	Constructor to create an object for each slider */
 function BuildWidget(target, params) {
 	this.target = target;
 	this.params = params;
@@ -200,6 +204,8 @@ BuildWidget.prototype.resizeCanvas = function() {
 	}
 };
 
+/*	buildCanvas()
+	create the canvas and add event listeners for mouse and touch */
 BuildWidget.prototype.buildCanvas = function() {
 	var self = this;
 
@@ -258,6 +264,9 @@ BuildWidget.prototype.getMousePos = function(evt) {
 	};
 };
 
+/*	loadImages()
+	If the images are loaded, store them in the allImages array
+	if there is a problem destroy the canvas and slider */
 BuildWidget.prototype.loadImages = function() {
 	var self = this;
 	this.widgetImages = this.outerWrapper.find(".widget-images");
@@ -285,12 +294,13 @@ BuildWidget.prototype.loadImages = function() {
 		thisImage.src = this.src;
 		self.params.allImages.push(thisImage);
 		
-		jQuery(this).error(function(evt) {
+		jQuery(this).load(checkImagesLoaded())
+			.error(function(evt) {
 				self.params.loadError = true;
 				self.destroy();
 			});
 
-		jQuery(this).load(checkImagesLoaded());
+		
 	});
 };
 
@@ -316,6 +326,8 @@ BuildWidget.prototype.makeRange = function() {
 	});
 };
 
+/*	drawFrame()
+	Draw the image segments onto the canvas and add a white line on the divide */
 BuildWidget.prototype.drawFrame = function() {
 	var self = this;
 
@@ -338,7 +350,6 @@ BuildWidget.prototype.drawFrame = function() {
 
 	this.ctx.clearRect(0,0, canvasFullWidth, canvasFullHeight);
 
-	
 	/* Check that params.value is greater than 0 so we're not multiplying width by 0 */
 	if (this.params.value > 0) {
 		this.ctx.drawImage(leftImage, 0, 0, leftImageWidth, imageFullHeight, 0, 0, leftCanvasWidth, canvasFullHeight);
@@ -347,13 +358,11 @@ BuildWidget.prototype.drawFrame = function() {
 		this.ctx.drawImage(rightImage, 0, 0, imageFullWidth, imageFullHeight, 0, 0, canvasFullWidth, canvasFullHeight);
 	}
 
-	
 	this.ctx.beginPath();
 	this.ctx.moveTo((canvasFullWidth * this.params.value),0);
 	this.ctx.lineTo((canvasFullWidth * this.params.value), canvasFullHeight);
 	this.ctx.closePath();
 	this.ctx.stroke();
-
 };
 
 /*	Self executing anonymous function to call init()

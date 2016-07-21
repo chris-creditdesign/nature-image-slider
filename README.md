@@ -1,10 +1,5 @@
 #Image slider for @NatureNews
 
-### To Do
-
-- Image loading - Check both images are loaded
-- Reset position to normal if resized
-
 ### Build process
 
 Uses [Grunt](http://gruntjs.com/) for file concatenation, to compile [Sass](http://sass-lang.com/) and apply [JSHint](https://github.com/gruntjs/grunt-contrib-jshint). If you've not used Grunt before, be sure to check out the [getting started guide](http://gruntjs.com/getting-started).

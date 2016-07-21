@@ -1,3 +1,5 @@
+/*	drawFrame()
+	Draw the image segments onto the canvas and add a white line on the divide */
 BuildWidget.prototype.drawFrame = function() {
 	var self = this;
 
@@ -20,7 +22,6 @@ BuildWidget.prototype.drawFrame = function() {
 
 	this.ctx.clearRect(0,0, canvasFullWidth, canvasFullHeight);
 
-	
 	/* Check that params.value is greater than 0 so we're not multiplying width by 0 */
 	if (this.params.value > 0) {
 		this.ctx.drawImage(leftImage, 0, 0, leftImageWidth, imageFullHeight, 0, 0, leftCanvasWidth, canvasFullHeight);
@@ -29,11 +30,9 @@ BuildWidget.prototype.drawFrame = function() {
 		this.ctx.drawImage(rightImage, 0, 0, imageFullWidth, imageFullHeight, 0, 0, canvasFullWidth, canvasFullHeight);
 	}
 
-	
 	this.ctx.beginPath();
 	this.ctx.moveTo((canvasFullWidth * this.params.value),0);
 	this.ctx.lineTo((canvasFullWidth * this.params.value), canvasFullHeight);
 	this.ctx.closePath();
 	this.ctx.stroke();
-
 };

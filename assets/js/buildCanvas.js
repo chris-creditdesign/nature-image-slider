@@ -1,3 +1,5 @@
+/*	buildCanvas()
+	create the canvas and add event listeners for mouse and touch */
 BuildWidget.prototype.buildCanvas = function() {
 	var self = this;
 

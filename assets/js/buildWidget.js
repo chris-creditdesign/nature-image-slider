@@ -1,3 +1,4 @@
+/*	Constructor to create an object for each slider */
 function BuildWidget(target, params) {
 	this.target = target;
 	this.params = params;

@@ -1,3 +1,5 @@
+/*	buildParams()
+	create an object to store all the parameters for the slider */
 function buildParams() {
 	var params = {};
 

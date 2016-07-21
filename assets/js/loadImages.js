@@ -1,3 +1,6 @@
+/*	loadImages()
+	If the images are loaded, store them in the allImages array
+	if there is a problem destroy the canvas and slider */
 BuildWidget.prototype.loadImages = function() {
 	var self = this;
 	this.widgetImages = this.outerWrapper.find(".widget-images");
@@ -25,11 +28,12 @@ BuildWidget.prototype.loadImages = function() {
 		thisImage.src = this.src;
 		self.params.allImages.push(thisImage);
 		
-		jQuery(this).error(function(evt) {
+		jQuery(this).load(checkImagesLoaded())
+			.error(function(evt) {
 				self.params.loadError = true;
 				self.destroy();
 			});
 
-		jQuery(this).load(checkImagesLoaded());
+		
 	});
 };
