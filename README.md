@@ -3,7 +3,6 @@
 ### To Do
 
 - Image loading - Check both images are loaded
-- Select - destroy if not possible to have a slider
 - Reset position to normal if resized
 
 ### Build process

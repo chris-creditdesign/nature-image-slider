@@ -193,6 +193,9 @@ BuildWidget.prototype.resizeCanvas = function() {
 		this.ctx.strokeStyle = "#ffffff";
 		this.ctx.lineWidth = 2;
 
+		this.params.value = this.params.startingValue;
+		this.rangeInput.prop("value", this.params.value);
+
 		this.drawFrame();
 	}
 };
