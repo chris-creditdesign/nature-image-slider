@@ -31,8 +31,8 @@ BuildWidget.prototype.drawFrame = function() {
 
 	
 	this.ctx.beginPath();
-	this.ctx.moveTo((this.params.width * this.params.value),0);
-	this.ctx.lineTo((this.params.width * this.params.value), canvasFullHeight);
+	this.ctx.moveTo((canvasFullWidth * this.params.value),0);
+	this.ctx.lineTo((canvasFullWidth * this.params.value), canvasFullHeight);
 	this.ctx.closePath();
 	this.ctx.stroke();
 

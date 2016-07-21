@@ -32,7 +32,14 @@
 
 	canvas {
 		cursor: col-resize;
+		transition: opacity 0.8s;
+		opacity: 1;
 	}
+
+	.canvasInvisible {
+		opacity: 0;
+	}
+
 
 	.widget-images {
 		ul {

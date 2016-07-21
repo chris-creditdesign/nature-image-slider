@@ -4,20 +4,21 @@ BuildWidget.prototype.buildCanvas = function() {
 	this.imageCanvas.attr({
 		"width": self.params.width,
 		"height": self.params.height
-	});
+	}).addClass("canvasInvisible");
 
 	this.outerWrapper.find(".widget-canvas")
 		.append(self.imageCanvas);
 
 	this.ctx = this.imageCanvas[0].getContext("2d");
+
 	this.ctx.strokeStyle = this.params.strokeStyle;
 	this.ctx.lineWidth = this.params.lineWidth;
 
-	$("body").bind(this.params.startEvent, function() {
+	jQuery("body").bind(this.params.startEvent, function() {
 		self.params.mouseDown = true;
 	});
 
-	$("body").bind(this.params.endEvent, function() {
+	jQuery("body").bind(this.params.endEvent, function() {
 		self.params.mouseDown = false;
 	});
 

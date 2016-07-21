@@ -15,6 +15,7 @@ function buildParams() {
 	params.heightRatio = 0.6667;
 	params.strokeStyle = "#ffffff";
 	params.lineWidth = 2;
+	params.loadError = false;
 
 	var size = getCanvasSize(params.widthAdjustment, params.heightRatio);
 

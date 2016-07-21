@@ -1,10 +1,11 @@
 /*	resize()
-	Redraw and resize the canvas */
+	Redraw and resize the canvas if the window width changes */
 BuildWidget.prototype.resizeCanvas = function() {
+	var self = this;
 	
 	if(jQuery(window).width() != this.params.windowWidth) {
 		
-		this.params.windowWidth = $(window).width();
+		this.params.windowWidth = jQuery(window).width();
 
 		var size = getCanvasSize(this.params.widthAdjustment, this.params.heightRatio);
 

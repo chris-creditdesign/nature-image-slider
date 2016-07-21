@@ -32,6 +32,11 @@
 }
 .outerwrapper canvas {
   cursor: col-resize;
+  transition: opacity 0.8s;
+  opacity: 1;
+}
+.outerwrapper .canvasInvisible {
+  opacity: 0;
 }
 .outerwrapper .widget-images ul {
   padding-left: 0;
@@ -56,37 +61,124 @@
 }
 </style>
 <!--<![endif]-->
+
 <div class="outerwrapper" id="slider-1">
-	<h2>Image slider: Spot the difference</h2>
+	<h2>Image slider: 1</h2>
 	<p>Greenland before and after.</p>
 	<div class="widget-canvas"></div>
 	<div class="widget-selector"></div>
 	<div class="widget-images">
-	<ul>
-		<li>
-			<img src="http://www.nature.com/polopoly_fs/7.37812.1468498740!/image/montage-107a.jpg" alt="before"/>
-			<p>Before</p>
-		</li>
-		<li>
-			<img src="http://www.nature.com/polopoly_fs/7.37813.1468498809!/image/montage-107b.jpg" alt="after" />
-			<p>After</p>
-		</li>
-	</ul>
-		
+		<ul>
+			<li>
+				<img src="http://www.nature.com/polopoly_fs/7.37812.1468498740!/image/montage-107a.jpg" alt="before"/>
+				<p>Before</p>
+			</li>
+			<li>
+				<img src="http://www.nature.com/polopoly_fs/7.37813.1468498809!/image/montage-107b.jpg" alt="after" />
+				<p>After</p>
+			</li>
+		</ul>
 	</div>
 </div>
-
 <p class="credit">Source:</p>
+
+<div class="outerwrapper" id="slider-2">
+	<h2>Image slider: 2</h2>
+	<p>Greenland before and after.</p>
+	<div class="widget-canvas"></div>
+	<div class="widget-selector"></div>
+	<div class="widget-images">
+		<ul>
+			<li>
+				<img src="http://www.nature.com/polopoly_fs/7.37952.1469027589!/image/montage-108a.jpg" alt="before"/>
+				<p>Before</p>
+			</li>
+			<li>
+				<img src="http://www.nature.com/polopoly_fs/7.37953.1469027618!/image/montage-108b.jpg" alt="after" />
+				<p>After</p>
+			</li>
+		</ul>
+	</div>
+</div>
+<p class="credit">Source:</p>
+
+<script src="https://code.jquery.com/jquery-1.6.4.min.js"></script>
 
 <!--[if gt IE 8]><!-->
 <script type="text/javascript">
+function buildParams() {
+	var params = {};
+
+	/* Array to store the images */
+	params.allImages = [];
+
+	/* Store with window Width to stop iOS resizing on scroll */
+	params.windowWidth = jQuery(window).width();
+	
+	params.range = null;
+	params.select = null;
+	params.startingValue = 0.5;
+	params.value = 0.5;
+	params.widthAdjustment = 0.9;
+	params.heightRatio = 0.6667;
+	params.strokeStyle = "#ffffff";
+	params.lineWidth = 2;
+	params.loadError = false;
+
+	var size = getCanvasSize(params.widthAdjustment, params.heightRatio);
+
+	params.width = size.width;
+	params.height = size.height;
+
+	params.touchSupported = 'ontouchstart' in window;
+	params.startEvent = params.touchSupported ? 'touchstart' : 'mousedown';
+	params.moveEvent = params.touchSupported ? 'touchmove' : 'mousemove';
+	params.endEvent = params.touchSupported ? 'touchend' : 'mouseup';
+	params.mouseDown = false;
+
+
+	return params;
+}
+
+function getCanvasSize(widthAdjustment, heightRatio) {
+
+	var width = Math.floor(jQuery("#content").width() * widthAdjustment);
+	var height = Math.floor(width * heightRatio);
+
+	return {
+		width: width,
+		height: height
+	};
+}
+
+function BuildWidget(target, params) {
+	this.target = target;
+	this.params = params;
+
+	this.outerWrapper = jQuery(target);
+	this.imageCanvas = jQuery("<canvas></canvas>");
+	this.rangeInput = jQuery("<input />");
+	this.ctx = null;
+}
+
+/*	destroy()
+	If it's not possible to build the canvas or the slider
+	remove them both and show the original images */
+BuildWidget.prototype.destroy = function() {
+
+	this.imageCanvas.remove();
+	this.rangeInput.remove();
+	this.widgetImages.css("display","block");
+};
+
 /*	resize()
-	Redraw and resize the canvas */
+	Redraw and resize the canvas if the window width changes */
 BuildWidget.prototype.resizeCanvas = function() {
+	var self = this;
 	
 	if(jQuery(window).width() != this.params.windowWidth) {
 		
-		this.params.windowWidth = $(window).width();
+		this.params.windowWidth = jQuery(window).width();
 
 		var size = getCanvasSize(this.params.widthAdjustment, this.params.heightRatio);
 
@@ -104,26 +196,28 @@ BuildWidget.prototype.resizeCanvas = function() {
 		this.drawFrame();
 	}
 };
+
 BuildWidget.prototype.buildCanvas = function() {
 	var self = this;
 
 	this.imageCanvas.attr({
 		"width": self.params.width,
 		"height": self.params.height
-	});
+	}).addClass("canvasInvisible");
 
 	this.outerWrapper.find(".widget-canvas")
 		.append(self.imageCanvas);
 
 	this.ctx = this.imageCanvas[0].getContext("2d");
+
 	this.ctx.strokeStyle = this.params.strokeStyle;
 	this.ctx.lineWidth = this.params.lineWidth;
 
-	$("body").bind(this.params.startEvent, function() {
+	jQuery("body").bind(this.params.startEvent, function() {
 		self.params.mouseDown = true;
 	});
 
-	$("body").bind(this.params.endEvent, function() {
+	jQuery("body").bind(this.params.endEvent, function() {
 		self.params.mouseDown = false;
 	});
 
@@ -140,6 +234,7 @@ BuildWidget.prototype.buildCanvas = function() {
 		
 	});
 };
+
 /*	getMousePos(canvas, evt)
 	Find out where the finger or the pointer is on the canvas */
 BuildWidget.prototype.getMousePos = function(evt) {
@@ -160,15 +255,9 @@ BuildWidget.prototype.getMousePos = function(evt) {
 	};
 };
 
-/*	makeSelect()
-	Append a select element and call drawFrame on change */
-BuildWidget.prototype.makeSelect = function() {
-	console.log("Let's call the whole thing off");
-};
-
 BuildWidget.prototype.loadImages = function() {
 	var self = this;
-	this.widgetImages = this.outerWrapper.select(".widget-images");
+	this.widgetImages = this.outerWrapper.find(".widget-images");
 		
 	/*	Select each of the images and push a new img object into
 		the allImages array with the relevant src */
@@ -177,28 +266,31 @@ BuildWidget.prototype.loadImages = function() {
 	var imageCount = this.images.length;
 
 	function checkImagesLoaded() {
-		imageCount--;
+		if (self.params.loadError === false) {
+			imageCount--;
+		}
 		
 		if (imageCount === 0) {
 			self.drawFrame();
+			self.imageCanvas.removeClass("canvasInvisible");
 		}
 	}
 
-	// /* Fill the canvas image with frame 0 as soon as it is ready */
-	// allImages[0].onload = checkImagesLoaded();
-	// allImages[1].onload = checkImagesLoaded();
-
-	$.each(self.images, function (key, value) {
+	jQuery.each(self.images, function (key, value) {
 
 		var thisImage = new Image();
 		thisImage.src = this.src;
 		self.params.allImages.push(thisImage);
 		
-		$(this).error(function(evt) {
-			console.log("We have an error!");
-		}).load(checkImagesLoaded());
+		jQuery(this).error(function(evt) {
+				self.params.loadError = true;
+				self.destroy();
+			});
+
+		jQuery(this).load(checkImagesLoaded());
 	});
 };
+
 /*	makeRange()
 	Append an input[type="range"] and call drawFrame on change */
 BuildWidget.prototype.makeRange = function() {
@@ -254,65 +346,15 @@ BuildWidget.prototype.drawFrame = function() {
 
 	
 	this.ctx.beginPath();
-	this.ctx.moveTo((this.params.width * this.params.value),0);
-	this.ctx.lineTo((this.params.width * this.params.value), canvasFullHeight);
+	this.ctx.moveTo((canvasFullWidth * this.params.value),0);
+	this.ctx.lineTo((canvasFullWidth * this.params.value), canvasFullHeight);
 	this.ctx.closePath();
 	this.ctx.stroke();
 
 };
-function buildParams() {
-	var params = {};
 
-	/* Array to store the images */
-	params.allImages = [];
-
-	/* Store with window Width to stop iOS resizing on scroll */
-	params.windowWidth = jQuery(window).width();
-	
-	params.range = null;
-	params.select = null;
-	params.startingValue = 0.5;
-	params.value = 0.5;
-	params.widthAdjustment = 0.9;
-	params.heightRatio = 0.6667;
-	params.strokeStyle = "#ffffff";
-	params.lineWidth = 2;
-
-	var size = getCanvasSize(params.widthAdjustment, params.heightRatio);
-
-	params.width = size.width;
-	params.height = size.height;
-
-	params.touchSupported = 'ontouchstart' in window;
-	params.startEvent = params.touchSupported ? 'touchstart' : 'mousedown';
-	params.moveEvent = params.touchSupported ? 'touchmove' : 'mousemove';
-	params.endEvent = params.touchSupported ? 'touchend' : 'mouseup';
-	params.mouseDown = false;
-
-
-	return params;
-}
-
-function getCanvasSize(widthAdjustment, heightRatio) {
-
-	var width = Math.floor(jQuery("#content").width() * widthAdjustment);
-	var height = Math.floor(width * heightRatio);
-
-	return {
-		width: width,
-		height: height
-	};
-}
-function BuildWidget(target, params) {
-	this.target = target;
-	this.params = params;
-
-	this.outerWrapper = jQuery(target);
-	this.imageCanvas = jQuery("<canvas></canvas>");
-	this.rangeInput = jQuery("<input />");
-	this.ctx = null;
-}
-
+/*	Self executing anonymous function to call init()
+	once jQuery is loaded */
 (function() {
 	var init = function($) {
 
@@ -320,35 +362,44 @@ function BuildWidget(target, params) {
 		var testInput = document.createElement("input");
 		testInput.setAttribute("type", "range");
 
-		var params = buildParams();
+		/* Dummy element to test if canvas is supported */
+		var testCanvas = document.createElement("canvas").getContext;
 
-		var slider = new BuildWidget("#slider-1", params);
+		var params1 = buildParams();
+		var params2 = buildParams();
 
-		slider.buildCanvas();
-		slider.loadImages();
+		var slider1 = new BuildWidget("#slider-1", params1);
+		var slider2 = new BuildWidget("#slider-2", params2);
 
-		/*	call makeRange() if input[type="range"] is supported
-			call makeSelect() otherwise */
-		if (testInput.type !== "text") {
-			slider.makeRange();
+		/*	Check if input[type="range"] and canvas is supported
+			otherwise call the whole thing off */
+		if (testInput.type !== "text" && testCanvas) {
+
+			slider1.buildCanvas();
+			slider2.buildCanvas();
+
+			slider1.loadImages();
+			slider2.loadImages();
+
+			slider1.makeRange();
+			slider2.makeRange();
 		} else {
-			slider.makeSelect();
+			slider1.destroy();
+			slider2.destroy();
 		}
 
 		window.onresize = function () {
-			slider.resizeCanvas();
+			slider1.resizeCanvas();
+			slider2.resizeCanvas();
 		};
 
 	};
 
 	/*	Before calling init()
-		- check jQuery is loaded
-		- check the images are hidden */
+		- check jQuery is loaded */
 	setTimeout(function() {
 		if (typeof jQuery !== 'undefined') {
-			// if (jQuery(".widget-images").css("display") !== "none") {
-			// 	jQuery(".widget-images").css("display","none");
-			// }
+
 			init(jQuery);
 		} else {
 			setTimeout(arguments.callee, 60);

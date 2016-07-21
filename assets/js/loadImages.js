@@ -1,6 +1,6 @@
 BuildWidget.prototype.loadImages = function() {
 	var self = this;
-	this.widgetImages = this.outerWrapper.select(".widget-images");
+	this.widgetImages = this.outerWrapper.find(".widget-images");
 		
 	/*	Select each of the images and push a new img object into
 		the allImages array with the relevant src */
@@ -9,25 +9,27 @@ BuildWidget.prototype.loadImages = function() {
 	var imageCount = this.images.length;
 
 	function checkImagesLoaded() {
-		imageCount--;
+		if (self.params.loadError === false) {
+			imageCount--;
+		}
 		
 		if (imageCount === 0) {
 			self.drawFrame();
+			self.imageCanvas.removeClass("canvasInvisible");
 		}
 	}
 
-	// /* Fill the canvas image with frame 0 as soon as it is ready */
-	// allImages[0].onload = checkImagesLoaded();
-	// allImages[1].onload = checkImagesLoaded();
-
-	$.each(self.images, function (key, value) {
+	jQuery.each(self.images, function (key, value) {
 
 		var thisImage = new Image();
 		thisImage.src = this.src;
 		self.params.allImages.push(thisImage);
 		
-		$(this).error(function(evt) {
-			console.log("We have an error!");
-		}).load(checkImagesLoaded());
+		jQuery(this).error(function(evt) {
+				self.params.loadError = true;
+				self.destroy();
+			});
+
+		jQuery(this).load(checkImagesLoaded());
 	});
 };
