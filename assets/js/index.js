@@ -19,7 +19,6 @@
 		/*	Check if input[type="range"] and canvas is supported
 			otherwise call the whole thing off */
 		if (testInput.type !== "text" && testCanvas) {
-
 			slider1.buildCanvas();
 			slider2.buildCanvas();
 
@@ -37,7 +36,6 @@
 			slider1.resizeCanvas();
 			slider2.resizeCanvas();
 		};
-
 	};
 
 	/*	Before calling init()

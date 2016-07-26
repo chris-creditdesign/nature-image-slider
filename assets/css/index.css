@@ -19,12 +19,12 @@
   background-color: #fff;
 }
 .outerwrapper h2 {
-  margin: 0 10px 0 5%;
-  padding: 20px 0 0 0;
+  margin: 0;
+  padding: 15px 2.5% 10px;
 }
 .outerwrapper p {
-  margin: 10px 10px 10px 5%;
-  padding: 0;
+  margin: 0;
+  padding: 10px 2.5% 10px;
 }
 .outerwrapper input {
   width: 100%;
@@ -44,10 +44,10 @@
   list-style: none;
 }
 .outerwrapper .widget-selector {
-  padding: 0 5% 10px;
-  margin: 10px 0;
+  padding: 0 2.5% 0;
+  margin: 10px 0 0;
 }
 .outerwrapper .widget-canvas {
   position: relative;
-  margin: 0 5%;
+  margin: 0 2.5%;
 }

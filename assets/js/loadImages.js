@@ -32,8 +32,6 @@ BuildWidget.prototype.loadImages = function() {
 			.error(function(evt) {
 				self.params.loadError = true;
 				self.destroy();
-			});
-
-		
+			});		
 	});
 };

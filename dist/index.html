@@ -20,12 +20,12 @@
   background-color: #fff;
 }
 .outerwrapper h2 {
-  margin: 0 10px 0 5%;
-  padding: 20px 0 0 0;
+  margin: 0;
+  padding: 15px 2.5% 10px;
 }
 .outerwrapper p {
-  margin: 10px 10px 10px 5%;
-  padding: 0;
+  margin: 0;
+  padding: 10px 2.5% 10px;
 }
 .outerwrapper input {
   width: 100%;
@@ -45,12 +45,12 @@
   list-style: none;
 }
 .outerwrapper .widget-selector {
-  padding: 0 5% 10px;
-  margin: 10px 0;
+  padding: 0 2.5% 0;
+  margin: 10px 0 0;
 }
 .outerwrapper .widget-canvas {
   position: relative;
-  margin: 0 5%;
+  margin: 0 2.5%;
 }
 
 </style>
@@ -63,47 +63,49 @@
 <!--<![endif]-->
 
 <div class="outerwrapper" id="slider-1">
-	<h2>Image slider 1</h2>
-	<p>Greenland before and after.</p>
+	<h2>The Mittivakkat Glacier</h2>
+
 	<div class="widget-canvas"></div>
 	<div class="widget-selector"></div>
+
 	<div class="widget-images">
 		<ul>
 			<li>
-				<img src="http://www.nature.com/polopoly_fs/7.37812.1468498740!/image/montage-107a.jpg" alt="before"/>
-				<p>Before</p>
+				<img src="http://www.nature.com/polopoly_fs/7.38030.1469528191!/image/montage-107a.jpg" alt="The Mittivakkat Glacier in 1933."/>
+				<p>The Mittivakkat Glacier in 1933.</p>
 			</li>
 			<li>
-				<img src="http://www.nature.com/polopoly_fs/7.37813.1468498809!/image/montage-107b.jpg" alt="after" />
-				<p>After</p>
+				<img src="http://www.nature.com/polopoly_fs/7.38031.1469528304!/image/montage-107b.jpg" alt="The Mittivakkat Glacier in 2010." />
+				<p>The Mittivakkat Glacier in 2010.</p>
 			</li>
 		</ul>
 	</div>
+
+	<p>The Mittivakkat Glacier has melted considerably since it was photographed by Danish researchers in 1933. Move the slider  to see the glacier in 2010, when it was photographed by a team from the University of Copenhagen and Aarhus University.</p>
 </div>
-<p class="credit">Source:</p>
 
 <div class="outerwrapper" id="slider-2">
-	<h2>Image slider 2</h2>
-	<p>Greenland before and after.</p>
+	<h2>The Tunu Glacier</h2>
+
 	<div class="widget-canvas"></div>
 	<div class="widget-selector"></div>
 	<div class="widget-images">
 		<ul>
 			<li>
-				<img src="http://www.nature.com/polopoly_fs/7.37952.1469027589!/image/montage-108a.jpg" alt="before"/>
-				<p>Before</p>
+				<img src="http://www.nature.com/polopoly_fs/7.38032.1469528322!/image/montage-108a.jpg" alt="The Tunu Glacier in 1933."/>
+				<p>The Tunu Glacier in 1933.</p>
 			</li>
 			<li>
-				<img src="http://www.nature.com/polopoly_fs/7.37953.1469027618!/image/montage-108b.jpg" alt="after" />
-				<p>After</p>
+				<img src="http://www.nature.com/polopoly_fs/7.38033.1469528340!/image/montage-108b.jpg" alt="The Tunu Glacier in 2010." />
+				<p>The Tunu Glacier in 1933.</p>
 			</li>
 		</ul>
 	</div>
-</div>
-<p class="credit">Source:</p>
 
-<!-- Just for testing in polopoly preview -->
-<script src="https://code.jquery.com/jquery-1.6.4.min.js"></script>
+	<p>The Tunu Glacier has retreated about 1500 meters since 1933. Move the slider to see the site in 2010, when the valley was almost free of ice.</p>
+
+</div>
+<p class="credit">Natural History Museum of Denmark; Hans Henrik Tholstrup/Natural History Museum of Denmark</p>
 
 <!--[if gt IE 8]><!-->
 <script type="text/javascript">
@@ -120,9 +122,9 @@ function buildParams() {
 	
 	params.range = null;
 	params.select = null;
-	params.startingValue = 0.5;
-	params.value = 0.5;
-	params.widthAdjustment = 0.9;
+	params.startingValue = 0;
+	params.value = 0;
+	params.widthAdjustment = 0.95;
 	params.heightRatio = 0.6667;
 	params.strokeStyle = "#ffffff";
 	params.lineWidth = 2;
@@ -138,7 +140,6 @@ function buildParams() {
 	params.moveEvent = params.touchSupported ? 'touchmove' : 'mousemove';
 	params.endEvent = params.touchSupported ? 'touchend' : 'mouseup';
 	params.mouseDown = false;
-
 
 	return params;
 }
@@ -240,7 +241,6 @@ BuildWidget.prototype.buildCanvas = function() {
 			self.drawFrame();
 			self.rangeInput.prop("value", self.params.value);
 		}
-		
 	});
 };
 
@@ -298,9 +298,7 @@ BuildWidget.prototype.loadImages = function() {
 			.error(function(evt) {
 				self.params.loadError = true;
 				self.destroy();
-			});
-
-		
+			});		
 	});
 };
 
@@ -386,7 +384,6 @@ BuildWidget.prototype.drawFrame = function() {
 		/*	Check if input[type="range"] and canvas is supported
 			otherwise call the whole thing off */
 		if (testInput.type !== "text" && testCanvas) {
-
 			slider1.buildCanvas();
 			slider2.buildCanvas();
 
@@ -404,7 +401,6 @@ BuildWidget.prototype.drawFrame = function() {
 			slider1.resizeCanvas();
 			slider2.resizeCanvas();
 		};
-
 	};
 
 	/*	Before calling init()

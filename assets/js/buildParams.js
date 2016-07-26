@@ -11,9 +11,9 @@ function buildParams() {
 	
 	params.range = null;
 	params.select = null;
-	params.startingValue = 0.5;
-	params.value = 0.5;
-	params.widthAdjustment = 0.9;
+	params.startingValue = 0;
+	params.value = 0;
+	params.widthAdjustment = 0.95;
 	params.heightRatio = 0.6667;
 	params.strokeStyle = "#ffffff";
 	params.lineWidth = 2;
@@ -29,7 +29,6 @@ function buildParams() {
 	params.moveEvent = params.touchSupported ? 'touchmove' : 'mousemove';
 	params.endEvent = params.touchSupported ? 'touchend' : 'mouseup';
 	params.mouseDown = false;
-
 
 	return params;
 }

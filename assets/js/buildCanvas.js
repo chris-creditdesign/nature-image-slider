@@ -34,6 +34,5 @@ BuildWidget.prototype.buildCanvas = function() {
 			self.drawFrame();
 			self.rangeInput.prop("value", self.params.value);
 		}
-		
 	});
 };
