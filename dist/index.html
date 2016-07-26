@@ -348,11 +348,16 @@ BuildWidget.prototype.drawFrame = function() {
 
 	this.ctx.clearRect(0,0, canvasFullWidth, canvasFullHeight);
 
-	/* Check that params.value is greater than 0 so we're not multiplying width by 0 */
-	if (this.params.value > 0) {
+	/*	Check that params.value is greater than 0 so we're not multiplying width by 0
+		and less than 1.
+	*/
+	if (this.params.value > 0 && this.params.value < 1) {
 		this.ctx.drawImage(leftImage, 0, 0, leftImageWidth, imageFullHeight, 0, 0, leftCanvasWidth, canvasFullHeight);
 		this.ctx.drawImage(rightImage, rightImageX, 0, rightImageWidth, imageFullHeight, rightCanvasX, 0, rightCanvasWidth, canvasFullHeight);
-	} else {
+	}  else if (this.params.value >= 1) {
+		this.ctx.drawImage(leftImage, 0, 0, imageFullWidth, imageFullHeight, 0, 0, canvasFullWidth, canvasFullHeight);
+	}	else {
+		/* We can now presume that this.params.value is 0 */
 		this.ctx.drawImage(rightImage, 0, 0, imageFullWidth, imageFullHeight, 0, 0, canvasFullWidth, canvasFullHeight);
 	}
 
