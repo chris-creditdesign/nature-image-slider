@@ -1,4 +1,6 @@
-#Image slider for @NatureNews
+# Image slider for @NatureNews
+
+Published online at: http://www.nature.com/news/180-000-forgotten-photos-reveal-the-future-of-greenland-s-ice-1.20335
 
 ### Build process
 
