@@ -11,7 +11,12 @@ BuildWidget.prototype.loadImages = function() {
 	
 	var imageCount = this.images.length;
 
-	function checkImagesLoaded() {
+	function loaded(img, index) {
+		self.params.allImages[index] = img;
+		checkAllImagesLoaded();
+	}
+
+	function checkAllImagesLoaded(img) {
 		if (self.params.loadError === false) {
 			imageCount--;
 		}
@@ -22,16 +27,23 @@ BuildWidget.prototype.loadImages = function() {
 		}
 	}
 
-	jQuery.each(self.images, function (key, value) {
-
+	self.images.get().forEach(function(elem,index,array) {
 		var thisImage = new Image();
-		thisImage.src = this.src;
-		self.params.allImages.push(thisImage);
-		
-		jQuery(this).load(checkImagesLoaded())
-			.error(function(evt) {
-				self.params.loadError = true;
-				self.destroy();
-			});		
+		thisImage.src = elem.src;
+
+		if (thisImage.complete) {
+			loaded(thisImage, index);
+		} else {
+			thisImage.addEventListener('load', function() {
+				loaded(this, index);
+			});
+		}
+
+		thisImage.addEventListener("error", function(e) {
+			console.log("There has been an error!");
+			console.log(e);
+			self.params.loadError = true;
+			self.destroy();
+		});
 	});
 };

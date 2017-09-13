@@ -99,7 +99,7 @@ module.exports = function(grunt){
 		    },
 			concat: {
 				files: ['assets/*','assets/js/*.js'],
-				tasks: ['jshint','concat']
+				tasks: ['concat']
 			}
 		}
 

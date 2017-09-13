@@ -6,11 +6,13 @@ BuildWidget.prototype.drawFrame = function() {
 	var canvasFullHeight = this.params.height;
 	var canvasFullWidth = this.params.width;
 
-	var imageFullWidth = this.params.allImages[1].width;
-	var imageFullHeight = this.params.allImages[1].height;
+	var imageFullWidth = this.params.allImages[0].width;
+	var imageFullHeight = this.params.allImages[0].height;
 
 	var leftImage = this.params.allImages[1];
 	var rightImage = this.params.allImages[0];
+
+
 
 	var leftImageWidth = imageFullWidth * this.params.value;
 	var leftCanvasWidth = canvasFullWidth * this.params.value;
